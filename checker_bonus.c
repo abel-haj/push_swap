@@ -1,35 +1,5 @@
 #include "push_swap.h"
 
-static size_t	ft_countsplit(const char *s, char c)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		while (s[i] && s[i] != c)
-			i++;
-		if (s[i - 1] != c)
-			j++;
-	}
-	return (j);
-}
-
-static char		**ft_freesplitted(char **s, size_t len)
-{
-	while (len + 1 > 0)
-	{
-		free(s[len]);
-		len--;
-	}
-	free(s);
-	return (NULL);
-}
-
 int	 is_number(char *s)
 {
 	size_t	i;
@@ -62,9 +32,6 @@ int		main(void)
 	char	**ints;
 	t_list	*my_list;
 	t_list	*head_list;
-
-	get_next_line(0, &line);
-	printf("|%s|\n", line);
 
 	my_list = NULL;
 	head_list = NULL;

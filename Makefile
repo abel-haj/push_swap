@@ -5,9 +5,10 @@ SRC			=	gnl/get_next_line.c gnl/get_next_line_utils.c \
 				utils/*.c \
 				checker_bonus.c
 
-FLAGS		=	
+FLAGS		=	-Wall -Werror -Wextra
 
 $(NAME):	
+	make -C libft
 
 bonus:		
 	@gcc $(SRC) -o checker && echo "checking..."
