@@ -29,25 +29,33 @@ int	main(int argc, char *argv[])
 {
 	size_t	i;
 	size_t	j;
-	t_list	int_l;
+	t_list	*int_l;
+	t_list	*int_head_l;
 
 	i = 1;
 	j = 0;
+	int_l = ft_lstnew(0);
+	int_head_l = int_l;
 	if (argc > 2)
 	{
 		while (i < argc)
 		{
-			// printf("[%ld:%s] -> %d\n", i+1, argv[i], is_number(argv[i]));
-
 			if (is_number(argv[i]))
 			{
-				printf("%d\n", atoi(argv[i]));
-				// printf("[%ld:%s] => %d\n", i+1, argv[i], ft_strncmp(argv[i], "-2147483648", ft_strlen("-2147483648") + 1));
-				// printf("[%ld:%s] => %d\n", i+1, argv[i], ft_strncmp(argv[i], "2147483647", ft_strlen("2147483648") + 1));
-				// 4294967296
+				int_l->content = ft_atoi(argv[i]);
+				if (int_l->content == -1 && ft_strncmp("-1", argv[i], 2))
+				{
+					printf("%s OVERFLOW\n", argv[i]);
+				}
+				else if (int_l->content == 0 && ft_strncmp("0", argv[i], 1))
+				{
+					printf("%s UNDERFLOW\n", argv[i]);
+				}
+				else
+				{
+					; // good
+				}
 			}
-			// else
-			// 	printf("")
 			i++;
 		}
 	}
