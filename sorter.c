@@ -59,6 +59,10 @@ int	is_sorted(int *ints, int size)
 	return (1);
 }
 
+/*
+ * 0 IS TOP
+ * SIZE IS BOTTOM
+ */
 int	main(int argc, char *argv[])
 {
 	size_t	i;
@@ -76,18 +80,20 @@ int	main(int argc, char *argv[])
 		{
 			if (is_number(argv[i]))
 			{
-				int_args[i - 1] = ft_atoi(argv[i]);
-				if (int_args[i - 1] == -1 && ft_strncmp("-1", argv[i], 2))
+				int_args[int_size - i - 1] = ft_atoi(argv[i]);
+				if (int_args[int_size - i - 1] == -1 && ft_strncmp("-1", argv[i], 2))
 				{
 					printf("%s OVERFLOW\n", argv[i]);
 					// write(1, "Error\n", 6);
+					write(1, "1", 1);
 					free(int_args);
 					exit(EXIT_FAILURE);
 				}
-				else if (int_args[i - 1] == 0 && ft_strncmp("0", argv[i], 1))
+				else if (int_args[int_size - i - 1] == 0 && ft_strncmp("0", argv[i], 1))
 				{
 					printf("%s UNDERFLOW\n", argv[i]);
 					// write(1, "Error\n", 6);
+					write(1, "2", 1);
 					free(int_args);
 					exit(EXIT_FAILURE);
 				}
@@ -96,6 +102,7 @@ int	main(int argc, char *argv[])
 			{
 				printf("%s: Not a number\n", argv[i]);
 				// write(1, "Error\n", 6);
+					write(1, "3", 1);
 				free(int_args);
 				exit(EXIT_FAILURE);
 			}
@@ -103,18 +110,36 @@ int	main(int argc, char *argv[])
 		}
 		i = 0;
 		if (is_duplicate(int_args, int_size))
+		{
 			printf("Duplicate\n");
 			// write(1, "Error\n", 6);
-		if (is_sorted(int_args, int_size))
-			printf("sorted\n");
-		else
-			printf("sort it\n");
+					write(1, "4", 1);
+			free(int_args);
+			exit(EXIT_FAILURE);
+		}
 
-		// while (i < int_size)
-		// {
-		// 	printf("%d ", int_args[i]);
-		// 	i++;
-		// }
+		if (is_sorted(int_args, int_size))
+		{
+			printf("sorted\n");
+			// free(int_args);
+		}
+		else
+		{
+			printf("magic\n");
+
+			// if (int_size == 3)
+			// {
+			// }
+		}
+		i = 0;
+		while (i < int_size)
+		{
+			printf("%d ", int_args[i]);
+			i++;
+		}
+
+					write(1, "5", 1);
+		// free(int_args);
 	}
 	return (0);
 }

@@ -9,7 +9,7 @@ FLAGS		=	-Wall -Werror -Wextra
 
 $(NAME):	
 	@make -C libft && echo "libft"
-	gcc libft/libft.a sorter.c -o push_swap
+	gcc sorter.c libft/libft.a -o push_swap
 
 bonus:		
 	@gcc $(SRC) -o checker && echo "checking..."
