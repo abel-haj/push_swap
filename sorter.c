@@ -4,7 +4,7 @@
  * checks string if it has no more than
  * one '-' and no charcters including '+'
  */
-int	 is_number(char *s)
+int	is_number(char *s)
 {
 	size_t	i;
 
@@ -22,39 +22,99 @@ int	 is_number(char *s)
 	return (1);
 }
 
+int	is_duplicate(int *ints, int size)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = 0;
+	j = i + 1;
+
+	while (i < size)
+	{
+		tmp = ints[i]; // 0
+		i++; // 1
+		while (j < size)
+		{
+			if (tmp == ints[j]) // 0  
+				return (1);
+			j++;
+		}
+	}
+	return (0);
+}
+
+int	is_sorted(int *ints, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (i + 1 < size && ints[i] > ints[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	size_t	i;
 	size_t	j;
-	t_list	*int_l;
-	t_list	*int_head_l;
+	int		*int_args;
+	int		int_size;
 
 	i = 1;
 	j = 0;
-	int_l = NULL;
-	int_head_l = int_l;
-	if (argc > 2)
+	if (argc > 1)
 	{
+		int_size = argc - 1;
+		int_args = malloc(sizeof(int) * int_size);
 		while (i < argc)
 		{
 			if (is_number(argv[i]))
 			{
-				int_l->content = ft_lstnew(ft_atoi(argv[i]));
-				if (int_l->content == -1 && ft_strncmp("-1", argv[i], 2))
+				int_args[i - 1] = ft_atoi(argv[i]);
+				if (int_args[i - 1] == -1 && ft_strncmp("-1", argv[i], 2))
 				{
 					printf("%s OVERFLOW\n", argv[i]);
+					// write(1, "Error\n", 6);
+					free(int_args);
+					exit(EXIT_FAILURE);
 				}
-				else if (int_l->content == 0 && ft_strncmp("0", argv[i], 1))
+				else if (int_args[i - 1] == 0 && ft_strncmp("0", argv[i], 1))
 				{
 					printf("%s UNDERFLOW\n", argv[i]);
+					// write(1, "Error\n", 6);
+					free(int_args);
+					exit(EXIT_FAILURE);
 				}
-				else
-				{
-					int_l = int_l->next;
-				}
+			}
+			else
+			{
+				printf("%s: Not a number\n", argv[i]);
+				// write(1, "Error\n", 6);
+				free(int_args);
+				exit(EXIT_FAILURE);
 			}
 			i++;
 		}
+		i = 0;
+		if (is_duplicate(int_args, int_size))
+			printf("Duplicate\n");
+			// write(1, "Error\n", 6);
+		if (is_sorted(int_args, int_size))
+			printf("sorted\n");
+		else
+			printf("sort it\n");
+
+		// while (i < int_size)
+		// {
+		// 	printf("%d ", int_args[i]);
+		// 	i++;
+		// }
 	}
 	return (0);
 }

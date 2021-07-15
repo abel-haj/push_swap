@@ -29,20 +29,20 @@ GNL_OBJ = $(GNL_SRC:.c=.o)
 all: $(NAME) bonus
 
 $(NAME):
-	@gcc $(CFLAGS) -c $(SRC) $(GNL_SRC) && echo "\033[1;33mCompiled object files"
-	@ar rc $(NAME) $(OBJ) $(GNL_OBJ) && echo "\033[0;32mCreated/updated library"
-	@ranlib $(NAME) && echo "\033[1;33mIndexed library"
+	@gcc $(CFLAGS) -c $(SRC) $(GNL_SRC) && echo "\033[1;33mCompiled object files\033[0m"
+	@ar rc $(NAME) $(OBJ) $(GNL_OBJ) && echo "\033[0;32mCreated/updated library\033[0m"
+	@ranlib $(NAME) && echo "\033[1;33mIndexed library\033[0m"
 
 bonus:
-	@gcc $(CFLAGS) -c $(BNS_SRC) && echo "\033[1;33mCompiled bonus object files"
-	@ar rc $(NAME) $(BNS_OBJ) && echo "\033[0;32mCreated/updated library with bonus"
-	@ranlib $(NAME) && echo "\033[1;33mIndexed library with bonus"
+	@gcc $(CFLAGS) -c $(BNS_SRC) && echo "\033[1;33mCompiled bonus object files\033[0m"
+	@ar rc $(NAME) $(BNS_OBJ) && echo "\033[0;32mCreated/updated library with bonus\033[0m"
+	@ranlib $(NAME) && echo "\033[1;33mIndexed library with bonus\033[0m"
 
 clean:
-	@rm -rf *.o && echo "\033[1;31mRemoved object files"
+	@rm -rf *.o && echo "\033[1;31mRemoved object files\033[0m"
 
 fclean: clean
-	@rm -rf $(NAME) && echo "\033[1;31mRemoved $(NAME)"
+	@rm -rf $(NAME) && echo "\033[1;31mRemoved $(NAME)\033[0m"
 
 re: fclean all
 
