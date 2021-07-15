@@ -1,5 +1,9 @@
 #include "push_swap.h"
 
+/*
+ * checks string if it has no more than
+ * one '-' and no charcters including '+'
+ */
 int	 is_number(char *s)
 {
 	size_t	i;
@@ -13,13 +17,6 @@ int	 is_number(char *s)
 			return (0);
 		i++;
 	}
-	// if (i >= 10)
-	// {
-	// 	if (ft_strncmp(s, "2147483647", ft_strlen("2147483647") + 1) > 0)
-	// 		return (0);
-	// 	if (ft_strncmp(s, "-2147483648", ft_strlen("-2147483648") + 1) > 0)
-	// 		return (0);
-	// }
 	if (i > 0 && s[i-1] == '-')
 		return (0);
 	return (1);
@@ -34,7 +31,7 @@ int	main(int argc, char *argv[])
 
 	i = 1;
 	j = 0;
-	int_l = ft_lstnew(0);
+	int_l = NULL;
 	int_head_l = int_l;
 	if (argc > 2)
 	{
@@ -42,7 +39,7 @@ int	main(int argc, char *argv[])
 		{
 			if (is_number(argv[i]))
 			{
-				int_l->content = ft_atoi(argv[i]);
+				int_l->content = ft_lstnew(ft_atoi(argv[i]));
 				if (int_l->content == -1 && ft_strncmp("-1", argv[i], 2))
 				{
 					printf("%s OVERFLOW\n", argv[i]);
@@ -53,7 +50,7 @@ int	main(int argc, char *argv[])
 				}
 				else
 				{
-					; // good
+					int_l = int_l->next;
 				}
 			}
 			i++;

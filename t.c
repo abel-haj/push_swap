@@ -51,19 +51,31 @@ int		main(int argc, char *argv[])
 	// }
 
 	int		i;
-	t_list	*a;
 	t_list	*h;
-	t_list	*t;
+
 	t_list	*f;
 	t_list	*s;
 	t_list	*t;
 
-	f->content = 1;
+	f = malloc(sizeof(t_list *));
+	s = malloc(sizeof(t_list *));
+	t = malloc(sizeof(t_list *));
+
+	f->content = (int *)1;
 	f->next = s;
-	s->content = 2;
+
+	s->content = (int *)2;
 	s->next = t;
-	t->content = 3;
+
+	t->content = (int *)3;
 	t->next = NULL;
+
+	h = f;
+	while (h)
+	{
+		printf("%d\n", (int)h->content);
+		h = h->next;
+	}
 
 	// i = 0;
 	// while (i < 5)
