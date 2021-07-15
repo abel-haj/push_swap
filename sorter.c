@@ -121,16 +121,12 @@ int	main(int argc, char *argv[])
 		if (is_sorted(int_args, int_size))
 		{
 			printf("sorted\n");
-			// free(int_args);
 		}
 		else
 		{
 			printf("magic\n");
-
-			// if (int_size == 3)
-			// {
-			// }
 		}
+
 		i = 0;
 		while (i < int_size)
 		{
