@@ -1,7 +1,7 @@
 
 NAME		= push_swap
 
-SRC			=	operations_one.c
+SRC			=	operations_one.c operations_two.c
 
 FLAGS		=	-Wall -Werror -Wextra
 DEBUG		=	-g -fsanitize=address
