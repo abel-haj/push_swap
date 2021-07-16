@@ -1,3 +1,4 @@
+ALL OPERATIONS:
 sa
 sb
 ss
@@ -9,3 +10,25 @@ rr
 rra
 rrb
 rrr
+
+
+
+
+
+
+
+
+1) manually sort stack A in a Temporary array
+2) split Temporary array into chunks
+3) move Temporary array chunks from stack A to stack B
+4) move chunks from stack B to stack A
+    while sorting them at the same time using Temporary array
+
+
+
+1   1   2   2   3   3
+2   3   1   3   2   1
+3   2   3   1   1   2
+
+G   sa  sa  sa  ra  ra
+    ra      ra  sa
