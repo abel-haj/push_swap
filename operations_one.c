@@ -38,3 +38,13 @@ void	swap_stack(int **ints_a, int size_a, char *op)
 	(*ints_a)[size_a - 1] = tmp;
 	write(1, op, ft_strlen(op));
 }
+
+/*
+ * Swap two stacks at the same time
+ */
+void	ss(int **ints_a, int **ints_b, int size_a, int size_b)
+{
+	swap_stack(ints_a, size_a, "");
+	swap_stack(ints_b, size_b, "");
+	write(1, "ss\n", 3);
+}
