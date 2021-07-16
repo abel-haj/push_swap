@@ -1,5 +1,13 @@
 #include "push_swap.h"
 
+static int	ternary_norm(int cond, int a, int b)
+{
+	if (cond)
+		return (a);
+	else
+		return (b);
+}
+
 /*
  * checks string if it has no more than
  * one '-' and no charcters including '+'
@@ -57,6 +65,51 @@ int	is_sorted(int *ints, int size)
 		i++;
 	}
 	return (1);
+}
+
+void	print_stack(int *a, int size)
+{
+	while (size > 0)
+	{
+		printf("%d ", a[size - 1]);
+		size--;
+	}
+	printf("\n");
+}
+
+void	print_stacks(int *a, int *b, int size_a, int size_b)
+{
+	int	i;
+	int	size;
+
+	i = 0;
+	size = ternary_norm(size_a > size_b, size_a, size_b);
+	while (i < size)
+	{
+		if (i < size_a)
+			printf("%5d", a[i]);
+		else
+			printf("     ");
+		
+		if (i < size_b)
+			printf("\t%5d\n", b[i]);
+		else
+			printf("\n");
+		i++;
+	}
+	printf("--------------------\n");
+}
+
+void	sort_three(int *a, int size)
+{
+	int	i;
+	int	big;
+
+	while (i < size)
+	{
+		
+		i++;
+	}
 }
 
 /*
@@ -130,14 +183,7 @@ int	main(int argc, char *argv[])
 		}
 		else
 		{
-
-			i = size_a;
-			while (i > 0)
-			{
-				printf("%d ", stack_a[i - 1]);
-				i--;
-			}
-			printf("\n");
+			print_stack(stack_a, size_a);
 
 			if (size_a == 2)
 			{
@@ -145,24 +191,20 @@ int	main(int argc, char *argv[])
 			}
 			else if (size_a == 3)
 			{
-				// write(1, "1\n", 2);
+				sort_three(stack_a, size_a);
 			}
-			if (size_a <= 5)
+			if (size_a == 5)
 			{
-				// write(1, "2\n", 2);
+				// swap_stack(&stack_a, size_a, "sa\n");
+				// rotate_stack(&stack_a, size_a, "ra\n");
+				rrotate_stack(&stack_a, size_a, "rra\n");
 			}
 			else
 			{
 				// write(1, "3\n", 2);
 			}
 
-			i = size_a;
-			while (i > 0)
-			{
-				printf("%d ", stack_a[i - 1]);
-				i--;
-			}
-			printf("\n");
+			print_stack(stack_a, size_a);
 		}
 
 		free(stack_a);
