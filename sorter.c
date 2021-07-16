@@ -52,7 +52,7 @@ int	is_sorted(int *ints, int size)
 	i = 0;
 	while (i < size)
 	{
-		if (i + 1 < size && ints[i] > ints[i + 1])
+		if (i + 1 < size && ints[i] < ints[i + 1])
 			return (0);
 		i++;
 	}
@@ -67,34 +67,38 @@ int	main(int argc, char *argv[])
 {
 	size_t	i;
 	size_t	j;
-	int		*int_args;
-	int		int_size;
+	int		*stack_a;
+	int		*stack_b;
+	int		size_a;
+	int		size_b;
 
 	i = 1;
 	j = 0;
 	if (argc > 1)
-	{
-		int_size = argc - 1;
-		int_args = malloc(sizeof(int) * int_size);
+	{	// 3	 =	4	- 1
+		size_a = argc - 1;
+		size_b = argc - 1;
+		stack_a = malloc(sizeof(int) * size_a);
+		stack_b = malloc(sizeof(int) * size_b);
 		while (i < argc)
 		{
 			if (is_number(argv[i]))
-			{
-				int_args[int_size - i - 1] = ft_atoi(argv[i]);
-				if (int_args[int_size - i - 1] == -1 && ft_strncmp("-1", argv[i], 2))
+			{	//			3	  - 3 - 1
+				stack_a[size_a - i] = ft_atoi(argv[i]);
+				if (stack_a[size_a - i] == -1 && ft_strncmp("-1", argv[i], 2))
 				{
 					printf("%s OVERFLOW\n", argv[i]);
 					// write(1, "Error\n", 6);
-					write(1, "1", 1);
-					free(int_args);
+					free(stack_a);
+					free(stack_b);
 					exit(EXIT_FAILURE);
 				}
-				else if (int_args[int_size - i - 1] == 0 && ft_strncmp("0", argv[i], 1))
+				else if (stack_a[size_a - i] == 0 && ft_strncmp("0", argv[i], 1))
 				{
 					printf("%s UNDERFLOW\n", argv[i]);
 					// write(1, "Error\n", 6);
-					write(1, "2", 1);
-					free(int_args);
+					free(stack_a);
+					free(stack_b);
 					exit(EXIT_FAILURE);
 				}
 			}
@@ -102,40 +106,67 @@ int	main(int argc, char *argv[])
 			{
 				printf("%s: Not a number\n", argv[i]);
 				// write(1, "Error\n", 6);
-					write(1, "3", 1);
-				free(int_args);
+				free(stack_a);
+				free(stack_b);
 				exit(EXIT_FAILURE);
 			}
 			i++;
 		}
 		i = 0;
-		if (is_duplicate(int_args, int_size))
+		if (is_duplicate(stack_a, size_a))
 		{
 			printf("Duplicate\n");
 			// write(1, "Error\n", 6);
-					write(1, "4", 1);
-			free(int_args);
+			free(stack_a);
+			free(stack_b);
 			exit(EXIT_FAILURE);
 		}
 
-		if (is_sorted(int_args, int_size))
+
+
+		if (is_sorted(stack_a, size_a))
 		{
 			printf("sorted\n");
 		}
 		else
 		{
-			printf("magic\n");
+
+			i = size_a;
+			while (i > 0)
+			{
+				printf("%d ", stack_a[i - 1]);
+				i--;
+			}
+			printf("\n");
+
+			if (size_a == 2)
+			{
+				swap_stack(&stack_a, size_a, "sa\n");
+			}
+			else if (size_a == 3)
+			{
+				// write(1, "1\n", 2);
+			}
+			if (size_a <= 5)
+			{
+				// write(1, "2\n", 2);
+			}
+			else
+			{
+				// write(1, "3\n", 2);
+			}
+
+			i = size_a;
+			while (i > 0)
+			{
+				printf("%d ", stack_a[i - 1]);
+				i--;
+			}
+			printf("\n");
 		}
 
-		i = 0;
-		while (i < int_size)
-		{
-			printf("%d ", int_args[i]);
-			i++;
-		}
-
-					write(1, "5", 1);
-		// free(int_args);
+		free(stack_a);
+		free(stack_b);
 	}
 	return (0);
 }

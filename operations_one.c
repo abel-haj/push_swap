@@ -6,33 +6,35 @@
  */
 
 /*
- * Push from b to a
+ * Push from stack 1 to 2
  */
-void	pa(int **ints_a, int **ints_b, int *size_a, int *size_b)
+void	push_stack(int **ints_to, int **ints_from, int *size_to, int *size_from, char *op)
 {
 	// a 0 -> b 0
 	int	i;
-	int	*tmp_a;
+	int	*tmp_to;
 
-	tmp_a = *ints_a;
-	(*ints_a) = malloc(sizeof(int) * *size_a + 1);
-	while (i < size_a)
+	tmp_to = *ints_to;
+	(*ints_to) = malloc(sizeof(int) * *size_to + 1);
+	while (i < *size_to)
 	{
-		(*ints_a)[i] = tmp_a[i];
+		(*ints_to)[i] = tmp_to[i];
 		i++;
 	}
-	(*ints_a)[i] = (*ints_b)[*size_b - 1];
-	(*size_a)++;
-	(*size_b)--;
+	(*ints_to)[i] = (*ints_from)[*size_from - 1];
+	(*size_to)++;
+	(*size_from)--;
+	write(1, op, ft_strlen(op));
 }
 
 /*
  * Swap the top elements in a
  */
-void	sa(int **ints_a, int size_a)
+void	swap_stack(int **ints_a, int size_a, char *op)
 {
 	int	tmp;
 	tmp = (*ints_a)[size_a - 2];
 	(*ints_a)[size_a - 2] = (*ints_a)[size_a - 1];
 	(*ints_a)[size_a - 1] = tmp;
+	write(1, op, ft_strlen(op));
 }
