@@ -53,3 +53,8 @@ dkms.conf
 
 # VS Code
 .vscode/
+
+# Program executables
+push_swap
+checker_bonus
+checker
