@@ -28,8 +28,26 @@ int	 is_number(char *s)
 	return (1);
 }
 
+void	triple_c(int **c)
+{
+	*c[0] = 3;
+}
+
+void	double_p(int **b)
+{
+	*b[0] = 1;
+	triple_c(b);
+}
+
 int		main(int argc, char *argv[])
 {
+	int	*a = malloc(sizeof(int) * 1);
+	a[0] = 0;
+
+	printf("%d\n", a[0]);
+	double_p(&a);
+	printf("%d\n", a[0]);
+
 	// int result;
 	// if (argc > 1)
 	// {
@@ -50,32 +68,32 @@ int		main(int argc, char *argv[])
 	// 	}
 	// }
 
-	int		i;
-	t_list	*h;
+	// int		i;
+	// t_list	*h;
 
-	t_list	*f;
-	t_list	*s;
-	t_list	*t;
+	// t_list	*f;
+	// t_list	*s;
+	// t_list	*t;
 
-	f = malloc(sizeof(t_list *));
-	s = malloc(sizeof(t_list *));
-	t = malloc(sizeof(t_list *));
+	// f = malloc(sizeof(t_list *));
+	// s = malloc(sizeof(t_list *));
+	// t = malloc(sizeof(t_list *));
 
-	f->content = (int *)1;
-	f->next = s;
+	// f->content = (int *)1;
+	// f->next = s;
 
-	s->content = (int *)2;
-	s->next = t;
+	// s->content = (int *)2;
+	// s->next = t;
 
-	t->content = (int *)3;
-	t->next = NULL;
+	// t->content = (int *)3;
+	// t->next = NULL;
 
-	h = f;
-	while (h)
-	{
-		printf("%d\n", (int)h->content);
-		h = h->next;
-	}
+	// h = f;
+	// while (h)
+	// {
+	// 	printf("%d\n", (int)h->content);
+	// 	h = h->next;
+	// }
 
 	// i = 0;
 	// while (i < 5)

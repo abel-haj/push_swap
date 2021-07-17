@@ -100,16 +100,100 @@ void	print_stacks(int *a, int *b, int size_a, int size_b)
 	printf("--------------------\n");
 }
 
-void	sort_three(int *a, int size)
+int	get_biggest_ind(int *stack, int size)
 {
 	int	i;
 	int	big;
 
+	i = 0;
+	big = i;
 	while (i < size)
 	{
-		
+		if (stack[i] > stack[big])
+			big = i;
 		i++;
 	}
+	return (big);
+}
+
+/*
+ * SIZE IS TOP
+ * 0 IS BOTTOM
+ */
+void	sort_three(int *a)
+{
+	int	big;
+
+	big = get_biggest_ind(a, 3);
+	if (big == 0)
+		swap_stack(&a, 3, "sa\n");
+	else if (big == 1)
+	{
+		if (a[0] > a[2])
+		{
+			swap_stack(&a, 3, "sa\n");
+			rotate_stack(&a, 3, "ra\n");
+		}
+		else
+			rrotate_stack(&a, 3, "rra\n");
+	}
+	else if (big == 2)
+	{
+		if (a[0] < a[1])
+		{
+			swap_stack(&a, 3, "sa\n");
+			rrotate_stack(&a, 3, "rra\n");
+		}
+		else
+			rotate_stack(&a, 3, "ra\n");
+	}
+	print_stack(a, 3);
+}
+
+/*
+ * SIZE IS TOP
+ * 0 IS BOTTOM
+ */
+void	sort_five(int *a, int *b)
+{
+	int	i;
+	int	big;
+	int	sizea;
+	int	sizeb;
+
+	sizea = 5;
+	sizeb = 0;
+	big = get_biggest_ind(a, 5);
+	// printf("%d\n", big / 2);
+	if (big / 2 == 0)
+	{
+		rrotate_stack(&a, 5, "rra\n");
+		if (big == 1)
+			rrotate_stack(&a, 5, "rra\n");
+	}
+	else if (big / 2 == 1)
+	{
+		rotate_stack(&a, 5, "ra\n");
+		if (big == 2)
+			rotate_stack(&a, 5, "ra\n");
+	}
+
+	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
+
+	big = get_biggest_ind(a, 4);
+	// printf("%d\n", big / 2);
+	if (big / 2 == 0)
+	{
+		rrotate_stack(&a, 4, "rra\n");
+		if (big == 1)
+			rrotate_stack(&a, 4, "rra\n");
+	}
+	else
+		if (big == 2)
+			rotate_stack(&a, 4, "ra\n");
+
+	print_stack(a, 3);
+	print_stack(b, 2);
 }
 
 /*
@@ -175,36 +259,36 @@ int	main(int argc, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 
-
-
 		if (is_sorted(stack_a, size_a))
 		{
 			printf("sorted\n");
 		}
 		else
 		{
-			print_stack(stack_a, size_a);
+			// print_stack(stack_a, size_a);
 
 			if (size_a == 2)
 			{
 				swap_stack(&stack_a, size_a, "sa\n");
+				print_stack(stack_a, size_a);
 			}
 			else if (size_a == 3)
 			{
-				sort_three(stack_a, size_a);
+				sort_three(stack_a);
 			}
-			if (size_a == 5)
+			else if (size_a == 5)    
 			{
+				sort_five(stack_a, stack_b);
 				// swap_stack(&stack_a, size_a, "sa\n");
 				// rotate_stack(&stack_a, size_a, "ra\n");
-				rrotate_stack(&stack_a, size_a, "rra\n");
+				// rrotate_stack(&stack_a, size_a, "rra\n");
+				// printf("sort five\n");
 			}
 			else
 			{
 				// write(1, "3\n", 2);
+				printf("sort a lot\n");
 			}
-
-			print_stack(stack_a, size_a);
 		}
 
 		free(stack_a);

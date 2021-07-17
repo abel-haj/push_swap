@@ -12,16 +12,19 @@ void	push_stack(int **ints_to, int **ints_from, int *size_to, int *size_from, ch
 {
 	// a 0 -> b 0
 	int	i;
-	int	*tmp_to;
+	// int	*tmp_to;
 
-	tmp_to = *ints_to;
-	(*ints_to) = malloc(sizeof(int) * *size_to + 1);
-	while (i < *size_to)
-	{
-		(*ints_to)[i] = tmp_to[i];
-		i++;
-	}
-	(*ints_to)[i] = (*ints_from)[*size_from - 1];
+	// tmp_to = *ints_to;
+	// (*ints_to) = malloc(sizeof(int) * *size_to + 1);
+	// while (i < *size_to)
+	// {
+	// 	(*ints_to)[i] = tmp_to[i];
+	// 	i++;
+	// }
+	// (*ints_to)[i] = (*ints_from)[*size_from - 1];
+	// KEEPING SAME ALLOCATED DATA
+	// CHANGING ONLY HYPOTHETICAL SIZE
+	(*ints_to)[*size_to] = (*ints_from)[(*size_from) - 1];
 	(*size_to)++;
 	(*size_from)--;
 	write(1, op, ft_strlen(op));
