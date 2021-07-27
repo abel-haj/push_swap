@@ -8,7 +8,7 @@
 /*
  * Push from stack 1 to 2
  */
-void	push_stack(int **ints_to, int **ints_from, int *size_to, int *size_from, char *op)
+void	push_stack(int **ints_from, int **ints_to, int *size_from, int *size_to, char *op)
 {
 	// a 0 -> b 0
 	int	i;
@@ -24,7 +24,7 @@ void	push_stack(int **ints_to, int **ints_from, int *size_to, int *size_from, ch
 	// (*ints_to)[i] = (*ints_from)[*size_from - 1];
 	// KEEPING SAME ALLOCATED DATA
 	// CHANGING ONLY HYPOTHETICAL SIZE
-	(*ints_to)[*size_to] = (*ints_from)[(*size_from) - 1];
+	(*ints_to)[*size_to] = (*ints_from)[*size_from - 1];
 	(*size_to)++;
 	(*size_from)--;
 	write(1, op, ft_strlen(op));

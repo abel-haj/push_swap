@@ -91,3 +91,29 @@ if top
 0
 1
 1
+
+
+0 1 2 3 4
+1 2 3 4 0
+
+
+0 ra
+1 ra ra
+2 rra rra
+3 rra
+4 N
+
+  3 4
+0 1 2
+
+4 3 0 1 2
+3 0 1 2 4
+
+SORT FIVE
+	push 2
+	sort 3
+	pop 1
+	resort
+	pop 1
+	resort
+MAX 10

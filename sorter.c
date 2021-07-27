@@ -147,7 +147,7 @@ void	sort_three(int *a)
 		else
 			rotate_stack(&a, 3, "ra\n");
 	}
-	print_stack(a, 3);
+	// print_stack(a, 3);
 }
 
 /*
@@ -163,8 +163,34 @@ void	sort_five(int *a, int *b)
 
 	sizea = 5;
 	sizeb = 0;
+
+	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
+	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
+	
+	if (!is_sorted(a, 3))
+		sort_three(a);
+
+	push_stack(&b, &a, &sizeb, &sizea, "pb\n");
+
+	if (a[3] > a[1])
+	{
+		rotate_stack(&a, sizea, "ra\n");
+		if (a[1] < a[0])
+			rotate_stack(&a, sizea, "ra\n");
+	}
+	else if (a[3] > a[2])
+	{
+		swap_stack(&a, sizea, "sa\n");
+	}
+
+	push_stack(&b, &a, &sizeb, &sizea, "pb\n");
+
+	// TODO : RESORT
+
+	print_stack(a, 4);
+
+/*
 	big = get_biggest_ind(a, 5);
-	// printf("%d\n", big / 2);
 	if (big / 2 == 0)
 	{
 		rrotate_stack(&a, 5, "rra\n");
@@ -178,7 +204,7 @@ void	sort_five(int *a, int *b)
 			rotate_stack(&a, 5, "ra\n");
 	}
 
-	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
+	push_stack(&a, &b, &sizea, &sizeb, "pb\n");
 
 	big = get_biggest_ind(a, 4);
 	// printf("%d\n", big / 2);
@@ -191,9 +217,9 @@ void	sort_five(int *a, int *b)
 	else
 		if (big == 2)
 			rotate_stack(&a, 4, "ra\n");
-
-	print_stack(a, 3);
-	print_stack(b, 2);
+*/
+	// print_stack(a, 3);
+	// print_stack(b, 2);
 }
 
 /*
@@ -275,10 +301,12 @@ int	main(int argc, char *argv[])
 			else if (size_a == 3)
 			{
 				sort_three(stack_a);
+				print_stack(stack_a, size_a);
 			}
-			else if (size_a == 5)    
+			else if (size_a == 5)
 			{
 				sort_five(stack_a, stack_b);
+				// print_stack(stack_a, size_a);
 				// swap_stack(&stack_a, size_a, "sa\n");
 				// rotate_stack(&stack_a, size_a, "ra\n");
 				// rrotate_stack(&stack_a, size_a, "rra\n");
