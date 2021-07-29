@@ -135,11 +135,80 @@ b c d e
 a d e b c	rra rra
 b c a d e
 
-a b c d e	N					a < b3
-b a c d e	sa					a > b3  &  a < c2
+a b c d e	pa					a < b3
+b a c d e	pa sa					a > b3  &  a < c2
 b c a d e	ra ra pa rra rra	a > c2  &  a < d1
-b c d a e	rra sa ra ra		a > d1  &  a < e0
-b c d e a	ra					a > e0
+b c d a e	pa rra sa ra ra		a > d1  &  a < e0
+b c d e a	pa ra					a > e0
 
 
 
+
+10 45 20 50 40
+
+10 20 40 50 55
+
+
+
+REVERSE ENGIN
+a b c d e
+e a b c d
+d e a b c
+e d a b c
+d a b c e
+a b c e d
+b c e d   a
+d b c e   a
+e d b c   a
+d b c     e a
+c d b     e a
+d c b     e a
+e d c b   a
+a e d c b
+------------wrong
+0 4 3 2 1
+-----------------
+
+a b c e     d
+e a b c     d
+c e a b     d
+e a b       c d
+b e a       c d
+e b a       c d
+c e b a     d
+d c e b a
+
+
+1 2 3 4 5
+1 2 3 5 4
+1 2 4 3 5
+1 2 4 5 3
+1 2 5 3 4
+1 2 5 4 3
+1 3 2 4 5
+1 3 2 5 4
+1 3 4 2 5
+1 3 4 5 2
+1 3 5 2 4
+1 3 5 4 2
+1 4 2 3 5
+1 4 2 5 3
+1 4 3 2 5
+1 4 3 5 2
+1 4 5 2 3
+1 4 5 3 2
+1 5 
+
+
+
+4 2 3 1 0
+
+2 4
+3 1 0
+
+2 4
+1 3 0
+
+
+3 2 1 0
+a b c d

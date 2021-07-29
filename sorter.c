@@ -125,6 +125,7 @@ void	sort_three(int *a)
 	int	big;
 
 	big = get_biggest_ind(a, 3);
+	printf("%d:%d\n", big, a[big]);
 	if (big == 0)
 		swap_stack(&a, 3, "sa\n");
 	else if (big == 1)
@@ -164,22 +165,26 @@ void	sort_five(int *a, int *b)
 	sizea = 5;
 	sizeb = 0;
 
+	// PUSH	1 -------------
 	// push first 2 numbers
 	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
 	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
 
+	// SORT	2 -------------
 	// sort other 3
 	if (!is_sorted(a, 3))
 		sort_three(a);
 
+	// POP	3
 	// pop back on number
 	push_stack(&b, &a, &sizeb, &sizea, "pb\n");
 
+	// RESORT 4 -------------
 	// resort with new number
 	if (a[3] > a[1])
 	{
 		rotate_stack(&a, sizea, "ra\n");
-		if (a[1] < a[0])
+		if (a[1] > a[0])
 			rotate_stack(&a, sizea, "ra\n");
 	}
 	else if (a[3] > a[2])
@@ -187,10 +192,8 @@ void	sort_five(int *a, int *b)
 		swap_stack(&a, sizea, "sa\n");
 	}
 
-	// TODO : RESORT
-
+	// POP & RESORT	4 & 5 -------------
 	// 5 POTENTIAL CASES
-
 	// 1) SORTED
 	if (a[4] < a[3])
 	{
@@ -202,7 +205,6 @@ void	sort_five(int *a, int *b)
 	// 2)
 	else if (a[4] > a[3] && a[4] < a[2])
 	{
-		// pop back last number
 		push_stack(&b, &a, &sizeb, &sizea, "pb\n");
 
 		swap_stack(&a, sizea, "sa\n");
@@ -214,7 +216,6 @@ void	sort_five(int *a, int *b)
 		rotate_stack(&a, sizea, "ra\n");
 		rotate_stack(&a, sizea, "ra\n");
 
-		// pop back last number
 		push_stack(&b, &a, &sizeb, &sizea, "pb\n");
 
 		rrotate_stack(&a, sizea, "rra\n");
@@ -224,7 +225,6 @@ void	sort_five(int *a, int *b)
 	// 4)
 	else if (a[4] > a[1] && a[4] < a[0])
 	{
-		// pop back last number
 		push_stack(&b, &a, &sizeb, &sizea, "pb\n");
 
 		rrotate_stack(&a, sizea, "rra\n");
@@ -238,13 +238,10 @@ void	sort_five(int *a, int *b)
 	// 5)
 	else if (a[4] > a[0])
 	{
-		// pop back last number
 		push_stack(&b, &a, &sizeb, &sizea, "pb\n");
 
 		rotate_stack(&a, sizea, "ra\n");
 	}
-
-	// print_stack(a, 4);
 }
 
 /*
