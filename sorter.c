@@ -164,14 +164,18 @@ void	sort_five(int *a, int *b)
 	sizea = 5;
 	sizeb = 0;
 
+	// push first 2 numbers
 	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
 	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
-	
+
+	// sort other 3
 	if (!is_sorted(a, 3))
 		sort_three(a);
 
+	// pop back on number
 	push_stack(&b, &a, &sizeb, &sizea, "pb\n");
 
+	// resort with new number
 	if (a[3] > a[1])
 	{
 		rotate_stack(&a, sizea, "ra\n");
@@ -183,43 +187,64 @@ void	sort_five(int *a, int *b)
 		swap_stack(&a, sizea, "sa\n");
 	}
 
-	push_stack(&b, &a, &sizeb, &sizea, "pb\n");
-
 	// TODO : RESORT
 
-	print_stack(a, 4);
+	// 5 POTENTIAL CASES
 
-/*
-	big = get_biggest_ind(a, 5);
-	if (big / 2 == 0)
+	// 1) SORTED
+	if (a[4] < a[3])
 	{
-		rrotate_stack(&a, 5, "rra\n");
-		if (big == 1)
-			rrotate_stack(&a, 5, "rra\n");
-	}
-	else if (big / 2 == 1)
-	{
-		rotate_stack(&a, 5, "ra\n");
-		if (big == 2)
-			rotate_stack(&a, 5, "ra\n");
+		// pop back last number
+		push_stack(&b, &a, &sizeb, &sizea, "pb\n");
+		// DONE
 	}
 
-	push_stack(&a, &b, &sizea, &sizeb, "pb\n");
-
-	big = get_biggest_ind(a, 4);
-	// printf("%d\n", big / 2);
-	if (big / 2 == 0)
+	// 2)
+	else if (a[4] > a[3] && a[4] < a[2])
 	{
-		rrotate_stack(&a, 4, "rra\n");
-		if (big == 1)
-			rrotate_stack(&a, 4, "rra\n");
+		// pop back last number
+		push_stack(&b, &a, &sizeb, &sizea, "pb\n");
+
+		swap_stack(&a, sizea, "sa\n");
 	}
-	else
-		if (big == 2)
-			rotate_stack(&a, 4, "ra\n");
-*/
-	// print_stack(a, 3);
-	// print_stack(b, 2);
+
+	// 3)
+	else if (a[4] > a[2] && a[4] < a[1])
+	{
+		rotate_stack(&a, sizea, "ra\n");
+		rotate_stack(&a, sizea, "ra\n");
+
+		// pop back last number
+		push_stack(&b, &a, &sizeb, &sizea, "pb\n");
+
+		rrotate_stack(&a, sizea, "rra\n");
+		rrotate_stack(&a, sizea, "rra\n");
+	}
+
+	// 4)
+	else if (a[4] > a[1] && a[4] < a[0])
+	{
+		// pop back last number
+		push_stack(&b, &a, &sizeb, &sizea, "pb\n");
+
+		rrotate_stack(&a, sizea, "rra\n");
+
+		swap_stack(&a, sizea, "sa\n");
+
+		rotate_stack(&a, sizea, "ra\n");
+		rotate_stack(&a, sizea, "ra\n");
+	}
+
+	// 5)
+	else if (a[4] > a[0])
+	{
+		// pop back last number
+		push_stack(&b, &a, &sizeb, &sizea, "pb\n");
+
+		rotate_stack(&a, sizea, "ra\n");
+	}
+
+	// print_stack(a, 4);
 }
 
 /*
@@ -306,7 +331,8 @@ int	main(int argc, char *argv[])
 			else if (size_a == 5)
 			{
 				sort_five(stack_a, stack_b);
-				// print_stack(stack_a, size_a);
+				print_stack(stack_a, size_a);
+
 				// swap_stack(&stack_a, size_a, "sa\n");
 				// rotate_stack(&stack_a, size_a, "ra\n");
 				// rrotate_stack(&stack_a, size_a, "rra\n");

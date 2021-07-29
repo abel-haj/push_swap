@@ -111,9 +111,35 @@ if top
 
 SORT FIVE
 	push 2
+			2
 	sort 3
+			2
 	pop 1
+			1
 	resort
+			2
 	pop 1
+			1
 	resort
+			5
 MAX 10
+
+
+      a
+b c d e
+
+
+  3 2 1 0
+  b c d e	ra ra
+  d e b c	pa
+a d e b c	rra rra
+b c a d e
+
+a b c d e	N					a < b3
+b a c d e	sa					a > b3  &  a < c2
+b c a d e	ra ra pa rra rra	a > c2  &  a < d1
+b c d a e	rra sa ra ra		a > d1  &  a < e0
+b c d e a	ra					a > e0
+
+
+
