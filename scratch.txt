@@ -201,14 +201,6 @@ d c e b a
 4 2 3 1 0
 
 
-pa pa     2
-sort 3    4
-resort    8
-
-a b c
-1 2 4
-4 1 2
-
 d a b c   pa
 a d b c   pa sa
 a b d c   rra pa ra ra
@@ -216,7 +208,65 @@ a b c d   pa rra
 
 
 e a b c d pa
-a e b c d sa
-a b e c d 
-a b c e d rra sa ra ra
-a b c d e rra
+a e b c d pa sa
+a b e c d ra ra pa rra rra
+a b c e d rra pa ra ra
+a b c d e pa ra
+
+
+3 4 5 2 1   13 operations vvvvvvvvvvvvvvvv
+
+
+
+
+
+
+NEW METHOD
+
+  push two smallest numbers
+  sort remaining three
+  pop back two previous numbers
+  DONE
+
+d:0
+b:1
+c:4
+e:3
+a:2
+
+4 3 2 1 0
+a b c d e
+
+  4   pb
+  3   ra pb
+  2   ra ra pb
+  1   rra rra pb
+  0   rra pb
+
+e a b c
+
+3 2 1 0
+a b c d
+
+  0   rra pb
+  1   rra rra pb
+  2   ra pb
+  3   pb
+
+
+c e a
+
+
+
+ra ra pb      3
+
+d e a b
+
+ra ra pb      3
+
+sort three    2
+
+pa pa         2
+
+TADAA         10
+
