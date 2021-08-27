@@ -167,31 +167,42 @@ void	sort_five(int *a, int *b)
 
 	// PUSH	1 -------------
 	// push first 2 numbers
-	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
-	push_stack(&a, &b, &sizea, &sizeb, "pa\n");
+	push_stack(&a, &b, &sizea, &sizeb, "pb\n");
+	push_stack(&a, &b, &sizea, &sizeb, "pb\n");
 
 	// SORT	2 -------------
 	// sort other 3
 	if (!is_sorted(a, 3))
 		sort_three(a);
 
-	// POP	3
+	// POP	3 -------------
 	// pop back on number
-	push_stack(&b, &a, &sizeb, &sizea, "pb\n");
-
-	// RESORT 4 -------------
-	// resort with new number
-	if (a[3] > a[1])
+	if (b[1] > a[0])
 	{
-		rotate_stack(&a, sizea, "ra\n");
-		if (a[1] > a[0])
-			rotate_stack(&a, sizea, "ra\n");
+		push_stack(&b, &a, &sizeb, &sizea, "pa\n");
+		rrotate_stack(&a, sizea, "rra\n");
 	}
-	else if (a[3] > a[2])
+	else if (b[1] > a[1])
 	{
+		rrotate_stack(&a, sizea, "rra\n");
+		push_stack(&b, &a, &sizeb, &sizea, "pa\n");
+		rotate_stack(&a, sizea, "ra\n");
+		rotate_stack(&a, sizea, "ra\n");
+	}
+	else if (b[1] > a[2])
+	{
+		push_stack(&b, &a, &sizeb, &sizea, "pa\n");
 		swap_stack(&a, sizea, "sa\n");
 	}
+	else
+	{
+		push_stack(&b, &a, &sizeb, &sizea, "pa\n");
+	}
 
+	// TODO : TODAY
+	// REDO RESORT 5
+
+	// WRONGS
 	// POP & RESORT	4 & 5 -------------
 	// 5 POTENTIAL CASES
 	// 1) SORTED
@@ -324,6 +335,10 @@ int	main(int argc, char *argv[])
 			{
 				sort_three(stack_a);
 				print_stack(stack_a, size_a);
+			}
+			else if (size_a == 4)
+			{
+				printf("sort 4\n");
 			}
 			else if (size_a == 5)
 			{
