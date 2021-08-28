@@ -23,4 +23,9 @@ void    rrotate_stack(int **ints, int size, char *op);
 // // void	rrb(int **ints_b, int size_b);
 void	rrr(int **ints_a, int **ints_b, int size_a, int size_b);
 
+int     ternary_norm(int cond, int a, int b);
+int     is_number(char *s);
+int     is_duplicate(int *ints, int size);
+int     is_sorted(int *ints, int size);
+
 #endif
