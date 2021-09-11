@@ -271,3 +271,19 @@ pa pa         2
 
 TADAA         10
 
+
+
+
+
+
+
+
+10 numbers
+
+100 number
+
+new array:sorted indexes
+push chunks
+
+
+

@@ -49,6 +49,54 @@ int	get_biggest_ind(int *stack, int size)
 	return (big);
 }
 
+int	get_smaller_ind_but(int *stack, int size, int but)
+{
+	int	i;
+	int	sm;
+	int	*stacktmp;
+	int	sizetmp;
+
+	i = 0;
+	sm = 0;
+	sizetmp = 0;
+	stacktmp = malloc(sizeof(int) * size);
+		while (i < size)
+		{
+			// smallest
+			if (but == -1)
+			{
+				if (stack[sm] > stack[i])
+					sm = i;
+			}
+
+			// store every number bigger than
+			// {stack[but]}
+			if (stack[but] < stack[i])
+			{
+				stacktmp[sizetmp] = stack[i];
+				sizetmp++;
+			}
+			i++;
+		}
+
+		if (but == -1)
+		{
+			free(stacktmp);
+			return (sm);
+		}
+
+		printf(" %d\n", sm);
+
+		i = 0;
+		while (i < sizetmp)
+		{
+			if (stacktmp[sm] > stacktmp[i])
+				sm = i;
+			i++;
+		}
+		return (sm);
+}
+
 /*
  * SIZE IS TOP
  * 0 IS BOTTOM
@@ -82,15 +130,11 @@ void	sort_three(int *a)
 	}
 }
 
-void	sort_four(int *a, int *b)
+void	sort_four(int *a, int *b, int sizea, int sizeb)
 {
 	size_t	i;
 	size_t	sm;
-	int		sizea;
-	int		sizeb;
 
-	sizea = 4;
-	sizeb = 0;
 	// GET SMALLEST NUMBER
 	i = 0;
 	sm = i;
@@ -123,15 +167,11 @@ void	sort_four(int *a, int *b)
  * SIZE IS TOP
  * 0 IS BOTTOM
  */
-void	sort_five(int *a, int *b)
+void	sort_five(int *a, int *b, int sizea, int sizeb)
 {
 	size_t	i;
 	size_t	sm;
-	int		sizea;
-	int		sizeb;
 
-	sizea = 5;
-	sizeb = 0;
 	// GET SMALLEST NUMBER
 	i = 0;
 	sm = i;
@@ -185,6 +225,53 @@ void	sort_five(int *a, int *b)
 	// POP BACK OTHER TWO
 	push_stack(&b, &a, &sizeb, &sizea, "pa\n");
 	push_stack(&b, &a, &sizeb, &sizea, "pa\n");
+}
+
+void	sort_a_lot(int *a, int *b, int sizea, int sizeb)
+{
+	size_t	i;
+	size_t	j;
+	// create new array
+	int	*stack_tmp;
+	int	sizetmp;
+	int	sm;
+
+	i = 0;
+	j = 1;
+	sm = 0;
+	sizetmp = 0;
+	stack_tmp = malloc(sizeof(int) * sizea);
+	// while (i < sizea)
+	// {
+		while (j < sizea)
+		{
+			if (a[j] < a[sm])
+				sm = j;
+			j++;
+		}
+
+		stack_tmp[sizetmp] = a[sm];
+		sizetmp++;
+
+		// TODO :
+		// 		sort 
+		// while (j < sizea)
+		// {
+		// 	if ()
+		// }
+	// 	i++;
+	// }
+	// sm = get_smaller_ind_but(a, sizea, -1);
+	// printf("(%d : %d) ", sm, a[sm]);
+
+	// sm = get_smaller_ind_but(a, sizea, sm);
+	// printf("(%d : %d) ", sm, a[sm]);
+
+	sm = get_smaller_ind_but(a, sizea, 0);
+	printf("(%d : %d) ", sm, a[sm]);
+
+	printf("\n");
+	// print_stack(stack_tmp, i);
 }
 
 /*
@@ -266,16 +353,19 @@ int	main(int argc, char *argv[])
 			}
 			else if (size_a == 4)
 			{
-				sort_four(stack_a, stack_b);
+				sort_four(stack_a, stack_b, 4, 0);
 			}
 			else if (size_a == 5)
 			{
-				sort_five(stack_a, stack_b);
+				sort_five(stack_a, stack_b, 5, 0);
+			}
+			else if (size_a >= 20)
+			{
+				sort_a_lot(stack_a, stack_b, size_a, size_b);
 			}
 			else
 			{
-				// write(1, "3\n", 2);
-				printf("sort a lot\n");
+				printf("sort a 19 - 6 : %d\n", size_a);
 			}
 			print_stack(stack_a, size_a);
 		}
